@@ -1,0 +1,23 @@
+body{
+  min-height: calc(100vh - 100px) !important;
+}
+
+.under-construction {
+  text-align: center;
+  padding: 50px;
+  font-family: Arial, sans-serif;
+  margin-top: 70px;
+}
+
+.under-construction img {
+  max-width: 250px;
+  margin-bottom: 20px;
+}
+
+.under-construction h2 {
+  color: #d9534f;
+}
+
+.under-construction p {
+  color: #555;
+}

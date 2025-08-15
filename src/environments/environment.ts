@@ -1,5 +1,5 @@
 // src/environments/environment.ts
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://localhost:7138/api/'
+  apiBaseUrl: 'https://localhost:7138/api'
 };

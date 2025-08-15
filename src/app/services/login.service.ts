@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   //private loginUri = "https://localhost:7138/api/user/login";
-  private loginUri = `${environment.apiBaseUrl}user/login`;
+  private loginUri = `${environment.apiBaseUrl}/user/login`;
 
   loginUserFunction(credentials : {UserName: string, Password: string}): Observable<any>{
     return this.http.post<any>(this.loginUri, credentials);

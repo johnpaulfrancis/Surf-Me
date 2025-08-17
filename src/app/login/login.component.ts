@@ -5,11 +5,12 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { response } from 'express';
 import { HttpStatusCode } from '@angular/common/http';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
- imports: [RouterLink, ReactiveFormsModule, CommonModule],
+ imports: [RouterLink, ReactiveFormsModule, CommonModule, NavBarComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

@@ -1,70 +1,10 @@
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #0c0c0c;
-  background-image: linear-gradient(135deg, #0c0c0c 0%, #171717 100%);
-  color: #d4d4d4;
-}
-
-.login-container {
-  max-width: 1200px;
-}
-
-.login-form-panel {
-  background-color: #0b1c1c;
-  box-shadow: inset 1px 0px 20px rgba(0, 0, 0, 0.6);
-  border-radius: 1.5rem;
-  padding: 2.5rem;
-}
-
-.form-control {
-  border: 1px solid #4a4a4a;
-  color: #000000;
-  transition: all 0.2s ease;
-}
-
-.form-control:focus {
-  color: #d4d4d4;
-  box-shadow: 0 0 0 0.25rem rgba(245, 197, 24, 0.5);
-  border-color: #f5c518;
-}
-
-.btn-primary {
-  background-color: #f5c518;
-  color: #121212;
-  border-color: #f5c518;
-  font-weight: 700;
-  transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #e0ac00;
-  border-color: #e0ac00;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(245, 197, 24, 0.4);
-}
-
-.text-gold {
-  color: #f5c518;
-}
-
-.text-gold:hover {
-  color: #e0ac00;
-}
-
-.form-check-input:checked {
-  background-color: #f5c518;
-  border-color: #f5c518;
-}
-
-.fixed-image {
-  width: 400px;   /* fixed width */
-  height: 300px;  /* fixed height */
-  object-fit: contain; /* keep aspect ratio */
-}
-
 .validationMsg {
     font-style: italic;
     color: red;
     padding-left: 15px;
     padding-top: -44px;
+} 
+
+.signup-section{
+  margin-top: 20px;
 }

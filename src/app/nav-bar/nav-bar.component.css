@@ -1,0 +1,60 @@
+/* Navigation Bar Styles */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--navbar-bg);
+  backdrop-filter: var(--glass-effect);
+  -webkit-backdrop-filter: var(--glass-effect); /* For Safari */
+  border-bottom: 1px solid var(--border-glow);
+  z-index: 1000;
+  transition: var(--transition-normal);
+  height: 70px;
+}
+
+#navbar.scrolled {
+  padding: 0.5rem 0;
+  background-color: rgba(17, 24, 39, 0.9); /* More opaque when scrolled */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Navbar Logo */
+   .app-logo {
+       max-width: 150px;
+   }
+
+/* Navigation Links */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, rgb(6, 182, 212), rgb(99, 102, 241));
+  transition: width 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
+
+.nav-link:hover {
+  color: var(--secondary);
+  text-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
+}
+
+@media (min-width: 1280px) {
+    .container {
+      max-width: 100%;
+    }
+}

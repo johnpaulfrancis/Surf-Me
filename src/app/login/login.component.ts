@@ -1,16 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms'; //For verifying the user input
 import { LoginService } from '../services/login.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router  } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { response } from 'express';
 import { HttpStatusCode } from '@angular/common/http';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
- imports: [RouterLink, ReactiveFormsModule, CommonModule, NavBarComponent],
+  imports: [RouterLink, ReactiveFormsModule, CommonModule, NavBarComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -22,7 +23,7 @@ export class LoginComponent {
   loginForm: FormGroup;
 
   //constructor is a special method that runs when the component is instantiated. In Angular, the constructor is typically used for dependency injection and initialization tasks
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private authService: AuthServiceService, private router: Router) {
 
     //inject(FormBuilder) is used to inject the FormBuilder service into the constructor.
     //FormBuilder is an Angular service that helps to create FormGroup and FormControl instances more easily and concisely
@@ -43,7 +44,10 @@ export class LoginComponent {
       this.loginService.loginUserFunction(loginFromVal).subscribe({
         next: (response: any) => {
           if (response.statusCode == HttpStatusCode.Ok) {
-            alert("login successful");
+            // Save token
+            this.authService.setToken(response.token)
+            // Navigate to dashboard
+            this.router.navigate(['user-dashboard']);
           }        
         },
         error: (err) =>{

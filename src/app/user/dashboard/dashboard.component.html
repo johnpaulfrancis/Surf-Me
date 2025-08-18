@@ -1,21 +1,61 @@
-<!-- Top Bar -->
-<div class="top-bar">
-    <img src="img/SurfMe-Logo.png" class="app-logo" alt="SurfMe logo" />
-    <div class="user-name">Welcome, John</div>
-</div>
+<app-nav-bar></app-nav-bar>
+<div class="pt-20 px-6">
+  <!-- Welcome -->
+  <div class="text-center mt-12">
+    <h1 class="text-5xl font-extrabold tracking-tight text-white">
+      Welcome Back,
+      <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        John
+      </span>
+    </h1>
+  </div>
 
-<!-- Middle Boxes -->
-<div class="box-container">
-    <div class="box">
-        <i class="fab fa-spotify"></i>
-        <span>Spotify</span>
+  <!-- Card Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-20 px-12">
+
+    <!-- Spotify -->
+    <div class="relative rounded-2xl overflow-hidden group cursor-pointer" [routerLink]="['/under-construction']">
+
+      <!-- Background image -->
+      <img src="img/music-thumbnail.png" alt="Spotify"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
+
+      <!-- Content -->
+      <div class="relative z-10 p-8 flex flex-col justify-end h-64">
+        <h2 class="text-2xl font-bold text-white">Spotify</h2>
+        <p class="text-gray-300 text-sm">Stream your favorite music and explore new releases.</p>
+      </div>
     </div>
-    <div class="box">
-        <i class="fas fa-map-marked-alt"></i>
-        <span>Google Maps</span>
+
+    <!-- Movies -->
+    <div class="relative rounded-2xl overflow-hidden group cursor-pointer" [routerLink]="['/under-construction']">
+
+      <img src="img/movies-thumbnail.png" alt="Movies"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
+
+      <div class="relative z-10 p-8 flex flex-col justify-end h-64">
+        <h2 class="text-2xl font-bold text-white">Movies</h2>
+        <p class="text-gray-300 text-sm">Browse trending movies and watch trailers instantly.</p>
+      </div>
     </div>
-    <div class="box">
-        <i class="fas fa-film"></i>
-        <span>Movies</span>
+
+    <!-- Google Maps -->
+    <div class="relative rounded-2xl overflow-hidden group cursor-pointer" [routerLink]="['/under-construction']">
+
+      <img src="img/location-thumbnail.png" alt="Google Maps"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-black/20"></div>
+
+      <div class="relative z-10 p-8 flex flex-col justify-end h-64">
+        <h2 class="text-2xl font-bold text-white">Google Maps</h2>
+        <p class="text-gray-300 text-sm">Find locations, routes, and explore the world visually.</p>
+      </div>
     </div>
+  </div>
 </div>

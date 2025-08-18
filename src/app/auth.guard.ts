@@ -11,7 +11,8 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true; //allow navigation
   }
   else{
-    router.parseUrl('/login');
+    localStorage.removeItem('jwtKey')
+    router.navigate(['login']);
     return false;
   }
 };

@@ -41,4 +41,13 @@ export class NavBarComponent implements OnInit {
     this.authService.logoutUser();
     this.router.navigate(['login']);
   }
+
+  goToMainPage() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['user-dashboard']);
+    }
+    else {
+      this.router.navigate(['']);
+    }
+  }
 }

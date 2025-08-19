@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms'; //For verifying the user input
 import { LoginService } from '../services/login.service';
 import { RouterLink, Router  } from '@angular/router';
@@ -15,8 +15,7 @@ import { AuthServiceService } from '../services/auth-service.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
-
+export class LoginComponent implements OnInit {
   //loginForm :property of a class with FormGroup type
   //FormGroup is a type from Angular's Reactive Forms module. It is used to represent a collection of FormControl instances, which in turn represent individual form fields.
   //In this case, loginForm will hold the form group that contains several form controls (like name, email, and password)
@@ -38,6 +37,11 @@ export class LoginComponent {
     });
   }
 
+  ngOnInit(): void {
+      //clear token when visiting this component if already loggined
+      this.authService.logoutUser();
+  }
+
   btnLoginClick() {
     if (this.loginForm.valid) {
       const loginFromVal = this.loginForm.value;
@@ -48,22 +52,22 @@ export class LoginComponent {
             this.authService.setToken(response.token)
             // Navigate to dashboard
             this.router.navigate(['user-dashboard']);
-          }        
+          }
         },
-        error: (err) =>{
-            const status = err?.status ?? 0; // safe check
+        error: (err) => {
+          const status = err?.status ?? 0; // safe check
           if (status == HttpStatusCode.Unauthorized) {
             alert("login failed");
           }
-          else{
+          else {
             alert("Internal server error");
           }
         }
       });
     }
-    else{
+    else {
       // Mark all controls as touched so validation messages show
-      Object.keys(this.loginForm.controls).forEach(key =>{
+      Object.keys(this.loginForm.controls).forEach(key => {
         const control = this.loginForm.get(key);
         control?.markAsTouched();
         control?.markAsDirty();

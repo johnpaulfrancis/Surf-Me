@@ -14,6 +14,7 @@ export class NavBarComponent implements OnInit {
 
   isLoggedIn = false;
   userName: string | null = null;
+  dropdownOpen = false;
 
   constructor(private authService: AuthServiceService, private router: Router) { }
 
@@ -24,9 +25,20 @@ export class NavBarComponent implements OnInit {
   checkLogin() {
     if (this.authService.isLoggedIn()) {
       this.isLoggedIn = true;
+      this.userName = this.authService.getLogginedUserName();
     }
     else {
       this.isLoggedIn = false;
     }
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  logout() {
+    this.dropdownOpen = false;
+    this.authService.logoutUser();
+    this.router.navigate(['login']);
   }
 }

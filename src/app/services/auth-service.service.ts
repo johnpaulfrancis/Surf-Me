@@ -27,6 +27,16 @@ export class AuthServiceService {
     return (token != null && !this.jwtHelper.isTokenExpired(token))
   }
 
+  getLogginedUserName(): string | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    const loginUSerName = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+    return loginUSerName || null;
+  }
+
   //Logout user
   logoutUser(){
     localStorage.removeItem(this.tokenKey);

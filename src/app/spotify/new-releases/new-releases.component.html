@@ -17,12 +17,6 @@
                 <div class="relative">
                     <img [src]="album.images[2].url" alt="{{album.name}}"
                         class="rounded-t-2xl h-64 w-full object-cover">
-
-                    <!-- Hover Play Button -->
-                    <button class="absolute bottom-3 right-3 bg-indigo-600 p-3 rounded-full shadow-md 
-                        opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        ▶
-                    </button>
                 </div>
 
                 <!-- Album Details -->
@@ -37,10 +31,10 @@
 
                     <!-- Buttons -->
                     <div class="mt-4 flex flex-col gap-2">
-                        <button class="w-full py-2 bg-indigo-600 rounded-xl hover:bg-indigo-700 text-sm font-medium">
+                        <button (click)="getTrackId(album.id)" class="w-full py-2 bg-indigo-600 rounded-xl hover:bg-indigo-700 text-sm font-medium">
                             ▶ View Tracks
                         </button>
-                        <button class="w-full py-2 bg-gray-700 rounded-xl hover:bg-gray-600 text-sm font-medium">
+                        <button routerLink="/under-construction" class="w-full py-2 bg-gray-700 rounded-xl hover:bg-gray-600 text-sm font-medium">
                             + Add to Playlist
                         </button>
                     </div>

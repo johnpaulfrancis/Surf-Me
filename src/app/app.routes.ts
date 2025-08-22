@@ -5,6 +5,7 @@ import { DashboardComponent } from './user/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { authGuard } from './auth.guard';
 import { NewReleasesComponent } from './spotify/new-releases/new-releases.component';
+import { TrackComponent } from './spotify/track/track.component';
 
 export const routes: Routes = [
     {
@@ -18,6 +19,9 @@ export const routes: Routes = [
     },
     {
         path:'spotify/new-release', component:NewReleasesComponent, canActivate: [authGuard]
+    },
+    {
+        path: 'spotify/track', component:TrackComponent, canActivate: [authGuard]
     },
     {
         path:'under-construction', component: UnderConstructionComponent

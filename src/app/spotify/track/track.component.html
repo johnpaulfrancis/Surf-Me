@@ -1,0 +1,62 @@
+<app-nav-bar></app-nav-bar>
+<div class="pt-16">
+    <div *ngIf="albumDetails; else errorMsg" class="relative min-h-screen bg-black text-white overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img [src]="albumDetails.images[0].url" alt="{{ albumDetails.name }}"
+                class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 py-10">
+            <!-- Album Header -->
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                <!-- Album Cover -->
+                <img [src]="albumDetails.images[0].url" alt="{{ albumDetails.name }}"
+                    class="w-48 h-48 md:w-64 md:h-64 rounded-xl shadow-lg">
+
+                <!-- Album Info -->
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold">{{ albumDetails.name }}</h1>
+                    <p class="text-gray-300 mt-2">
+                        Released on {{ albumDetails.release_date | date: 'dd MMM yyyy' }}
+                    </p>
+                    <p class="text-gray-400 mt-1">{{ albumDetails.total_tracks }} Tracks</p>
+                </div>
+            </div>
+
+            <!-- Track List -->
+            <div class="mt-10 bg-black/50 rounded-xl p-6 shadow-lg">
+                <h2 class="text-xl font-semibold mb-4">Tracks</h2>
+                <div class="space-y-3 max-h-[50vh] overflow-y-auto">
+                    <div *ngFor="let track of albumDetails.tracks.items; let i = index"
+                        class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-800 transition">
+                        <div>
+                            <p class="font-medium">{{ i + 1 }}. {{ track.name }}</p>
+                            <p class="text-sm text-gray-400">{{ConvertMsToMinute(track.duration_ms)}}</p>
+                        </div>
+                        <a target="_blank" [href]="getSafeUrl(track.external_urls.spotify)"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">
+                            ▶ Play
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Back Button -->
+            <div class="mt-8">
+                <a routerLink="/spotify/new-release"
+                    class="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium">
+                    ← Back to New Releases
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #errorMsg>
+        <h5>Something went wrong....</h5>
+    </ng-template>
+</div>

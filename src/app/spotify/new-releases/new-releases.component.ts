@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from '../../nav-bar/nav-bar.component';
 import { Album } from '../../models/spotify/new-album-model.model';
 import { SpotifyNewAlbumServiceService } from '../../services/spotify-new-album-service.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-new-releases',
   standalone: true,
-  imports: [CommonModule, NavBarComponent],
+  imports: [CommonModule, NavBarComponent, RouterLink],
   templateUrl: './new-releases.component.html',
   styleUrl: './new-releases.component.css'
 })
@@ -21,7 +22,7 @@ export class NewReleasesComponent implements OnInit {
 
   private newReleaseUri = 'https://api.spotify.com/v1/browse/new-releases?limit=' + this.itemsPerRequest;
 
-  constructor(private spotifyAlbumService: SpotifyNewAlbumServiceService) { }
+  constructor(private spotifyAlbumService: SpotifyNewAlbumServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.getNewReleases();
@@ -50,5 +51,9 @@ export class NewReleasesComponent implements OnInit {
     this.newReleaseUri = 'https://api.spotify.com/v1/browse/new-releases?limit=' + this.itemsPerRequest + '&offset=' + offset;
     this.getNewReleases();
     this.currentPage--;
+  }
+
+  getTrackId(trackId: string){
+    this.router.navigate(['/spotify/track'], {queryParams: {id: trackId}});
   }
 }

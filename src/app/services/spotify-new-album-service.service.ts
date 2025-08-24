@@ -3,11 +3,14 @@ import { map, Observable, switchMap } from 'rxjs';
 import { SpotifyAlbumModel } from '../models/spotify/new-album-model.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SpotifyTracksModel } from '../models/spotify/album-tracks-model.model';
+import { SpotifySearchModel } from '../models/spotify/search-model.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyNewAlbumServiceService {
+
+  private searchBaseUri = 'https://api.spotify.com/v1/search';
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +36,21 @@ export class SpotifyNewAlbumServiceService {
         return this.http.get<SpotifyTracksModel>(albumTrackUrl, { headers });
       })
     );
+  }
+
+  /*Search Result from Spotify*/
+  getSearchResults(searchVal: string): Observable<SpotifySearchModel>{
+    return this.generateAccessToken().pipe(
+      switchMap(tokenGenerated => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${tokenGenerated}`
+        });
+        return this.http.get<SpotifySearchModel>(this.searchBaseUri, {
+          headers,
+          params:{q: searchVal, limit: 20, type: 'track', offset: 0}
+        });
+      })
+    )
   }
 
 

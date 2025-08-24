@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { authGuard } from './auth.guard';
 import { NewReleasesComponent } from './spotify/new-releases/new-releases.component';
 import { TrackComponent } from './spotify/track/track.component';
+import { SpotifyHomeComponent } from './spotify/spotify-home/spotify-home.component';
 
 export const routes: Routes = [
     {
@@ -17,8 +18,8 @@ export const routes: Routes = [
     {
         path:'user-dashboard', component:DashboardComponent, canActivate: [authGuard]
     },
-    {
-        path:'spotify/new-release', component:NewReleasesComponent, canActivate: [authGuard]
+     {
+        path: 'spotify/home', component:SpotifyHomeComponent, canActivate: [authGuard]
     },
     {
         path: 'spotify/track', component:TrackComponent, canActivate: [authGuard]

@@ -1,0 +1,61 @@
+<app-nav-bar></app-nav-bar>
+<div class="pt-20">
+    <div class="px-6 bg-gradient-to-b from-black via-gray-900 to-black text-white">
+        <!-- Section Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold tracking-wide flex items-center gap-2">
+                🔍 Search Songs
+            </h2>
+            <hr class="my-8 border-gray-700">
+           
+        </div>
+         <!-- Search Box -->
+            <div class="max-w-5xl mx-auto text-white">
+                <div class="mb-6">
+                    <input id="search" type="text" placeholder="Type to search songs..."
+                        class="w-full p-3 rounded-xl bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:border-purple-500 focus:ring focus:ring-purple-500 focus:ring-opacity-50"
+                        (input)="getSearchResult($event)" />
+                </div>
+            </div>
+
+        <!-- Album Carousel -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 pb-6"
+            *ngIf="tracks.length > 0; else loading">
+            <div *ngFor="let track of tracks" class="rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 shadow-xl 
+                hover:scale-105 hover:shadow-indigo-500/40 transition-all duration-300 group">
+                <!-- Album Image -->
+                <div class="relative">
+                    <img [src]="track.album.images[0].url" alt="{{track.album.name}}"
+                        class="rounded-t-2xl h-64 w-full object-cover">
+                </div>
+
+                <!-- Album Details -->
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg truncate">{{ track.album.name }}</h3>
+                    <p class="text-sm text-gray-400 truncate">Released on {{ track.album.release_date | date: 'dd MMM yy' }}
+                    </p>
+
+                    <div class="flex items-center mt-2 text-yellow-400 text-sm">
+                        Tracks: {{ track.album.total_tracks }}
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="mt-4 flex flex-col gap-2">
+                        <button (click)="getTrackId(track.album.id)"
+                            class="w-full py-2 bg-indigo-600 rounded-xl hover:bg-indigo-700 text-sm font-medium">
+                            ▶ View Tracks
+                        </button>
+                        <button routerLink="/under-construction"
+                            class="w-full py-2 bg-gray-700 rounded-xl hover:bg-gray-600 text-sm font-medium">
+                            + Add to Playlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+<app-new-releases></app-new-releases>
+</ng-template>

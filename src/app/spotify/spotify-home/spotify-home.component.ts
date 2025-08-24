@@ -40,7 +40,6 @@ export class SpotifyHomeComponent {
   searchTracks(){
  this.spotifyAlbumService.getSearchResults(this.query).subscribe(
       datas => {
-        console.log(datas);
         this.tracks = datas.tracks.items;
       }
     );

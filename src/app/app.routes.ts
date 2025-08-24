@@ -4,7 +4,7 @@ import { UnderConstructionComponent } from './MessagePages/under-construction/un
 import { DashboardComponent } from './user/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { authGuard } from './auth.guard';
-import { NewReleasesComponent } from './spotify/new-releases/new-releases.component';
+import { CountryDetailsComponent } from './user/country-details/country-details.component';
 import { TrackComponent } from './spotify/track/track.component';
 import { SpotifyHomeComponent } from './spotify/spotify-home/spotify-home.component';
 
@@ -18,11 +18,14 @@ export const routes: Routes = [
     {
         path:'user-dashboard', component:DashboardComponent, canActivate: [authGuard]
     },
-     {
+    {
         path: 'spotify/home', component:SpotifyHomeComponent, canActivate: [authGuard]
     },
     {
         path: 'spotify/track', component:TrackComponent, canActivate: [authGuard]
+    },
+    {
+        path: 'country-search', component:CountryDetailsComponent, canActivate: [authGuard]
     },
     {
         path:'under-construction', component: UnderConstructionComponent

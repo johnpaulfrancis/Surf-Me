@@ -1,0 +1,104 @@
+<app-nav-bar></app-nav-bar>
+<div class="pt-20">
+  <div class="px-6 bg-gradient-to-b from-black via-gray-900 to-black text-white">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold tracking-wide">🌍 Explore Countries</h2>
+    </div>
+
+    <!-- Search -->
+    <div class="max-w-5xl mx-auto text-white mb-8">
+      <input
+        id="search"
+        type="text"
+        placeholder="Search countries..."
+        class="w-full p-3 rounded-xl bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:border-purple-500 focus:ring focus:ring-purple-500/40"
+        (input)="getSearchResult($event)"
+      />
+    </div>
+
+    <!-- Country Grid -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 pb-6"
+      *ngIf="countries.length > 0; else loading"
+    >
+      <div
+        *ngFor="let country of countries"
+        class="relative p-6 rounded-2xl bg-white/10 backdrop-blur-md shadow-lg border border-white/10 hover:border-purple-400/40 hover:shadow-purple-500/20 transition-all duration-300 flex flex-col items-center"
+      >
+        <!-- Rectangular Flag -->
+        <div class="w-full h-28 overflow-hidden rounded-md shadow-md mb-4">
+          <img
+            [src]="country.flags?.svg || country.flags?.png"
+            alt="{{ country.name.common }}"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Country Name -->
+        <h3 class="text-lg font-bold mb-3 text-center">{{ country.name.common }}</h3>
+
+        <!-- Country Details -->
+        <div class="text-sm text-gray-300 space-y-1 w-full text-center">
+          <p><strong>Capital:</strong> {{ country.capital || 'N/A' }}</p>
+          <p><strong>Region:</strong> {{ country.region }}</p>
+          <p><strong>Population:</strong> {{ country.population | number }}</p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex gap-2 mt-4">
+          <a
+            [href]="country.maps?.googleMaps"
+            target="_blank"
+            class="px-3 py-2 text-sm rounded-lg bg-purple-600 hover:bg-purple-700 transition"
+          >
+            View Map
+          </a>
+          <button
+            (click)="openDetails(country)"
+            class="px-3 py-2 text-sm rounded-lg bg-indigo-600 hover:bg-indigo-700 transition"
+          >
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Popup -->
+<div
+  *ngIf="selectedCountry"
+  class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50"
+>
+  <div class="bg-gray-900 text-white rounded-2xl p-6 w-full max-w-lg shadow-2xl relative">
+    <button
+      (click)="closeDetails()"
+      class="absolute top-3 right-3 text-gray-400 hover:text-white"
+    >
+      ✕
+    </button>
+    <h2 class="text-2xl font-bold mb-4">{{ selectedCountry.name.common }}</h2>
+    <div class="mb-4">
+      <img
+        [src]="selectedCountry.flags?.svg || selectedCountry.flags?.png"
+        class="w-full h-40 object-cover rounded-lg"
+      />
+    </div>
+    <div class="space-y-2 text-sm">
+      <p><strong>Official Name:</strong> {{ selectedCountry.name.official }}</p>
+      <p><strong>Capital:</strong> {{ selectedCountry.capital || 'N/A' }}</p>
+      <p><strong>Region:</strong> {{ selectedCountry.region }}</p>
+      <p><strong>Subregion:</strong> {{ selectedCountry.subregion }}</p>
+      <p><strong>Population:</strong> {{ selectedCountry.population | number }}</p>
+      <p><strong>Area:</strong> {{ selectedCountry.area | number }} km²</p>
+      <p><strong>Timezones:</strong> {{ selectedCountry.timezones?.join(', ') }}</p>
+      <p><strong>Languages:</strong> {{ selectedCountry.languages | json }}</p>
+      <p><strong>Currencies:</strong> {{ selectedCountry.currencies | json }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+</ng-template>
